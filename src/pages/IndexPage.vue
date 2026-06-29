@@ -10,6 +10,9 @@
       :blurredbackground-high-framerate="configurationStore.configuration.uisettings.livestream_blurredbackground_high_framerate"
     ></preview-stream>
 
+    <!-- semi-transparent print queue status overlay -->
+    <PrintQueueOverlay v-if="configurationStore.configuration.print_queue_overlay.enabled" />
+
     <!-- layer display processing spinner grid to show user computer working hard -->
     <div v-if="stateStore.isStateProcessing" class="full-height full-width column justify-center content-center" style="position: absolute">
       <q-spinner-grid size="20em" />
@@ -113,6 +116,7 @@ import CountdownTimer from '@/components/CountdownTimer.vue'
 import type { TriggerSchema } from '@/components/FrontpageTriggerButtons.vue'
 import { default as FrontpageTriggerButtons } from '@/components/FrontpageTriggerButtons.vue'
 import { default as PreviewStream } from '@/components/PreviewStream.vue'
+import PrintQueueOverlay from '@/components/PrintQueueOverlay.vue'
 import _ from 'lodash'
 import MediaItemApprovalViewer from '@/components/MediaItemApprovalViewer.vue'
 
@@ -143,7 +147,7 @@ const triggerButtons = computed(() => {
         title: action.trigger.ui_trigger.title,
         icon: action.trigger.ui_trigger.icon,
         use_custom_color: action.trigger.ui_trigger.use_custom_color,
-        custom_color: action.trigger.ui_trigger.custom_color
+        custom_color: action.trigger.ui_trigger.custom_color,
       }
 
       result.push(trigger)
